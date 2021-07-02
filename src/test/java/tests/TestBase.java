@@ -73,7 +73,7 @@ public class TestBase extends AbstractTestNGCucumberTests {
 			
 		}
 		
-		//headless browser testing
+		//headless browser testing using Phantomjs 
 		else if(browserName.equalsIgnoreCase("headless"))
 		{
 			DesiredCapabilities caps = new DesiredCapabilities();
@@ -83,6 +83,19 @@ public class TestBase extends AbstractTestNGCucumberTests {
 			String [] phantomJsArgs = {"--web-security=no","--ignore-ssl-errors=yes"};
 			caps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomJsArgs);
 			driver = new PhantomJSDriver(caps);
+		}
+		
+		//headless browser testing
+		else if(browserName.equalsIgnoreCase("chrome-headless"))
+		{
+			
+			String Chromepath=System.getProperty("user.dir")+"\\drivers\\chromedriver.exe";
+			System.setProperty("webdriver.chrome.driver", Chromepath);
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--headless");
+			options.addArguments("--window-size=1920,1080");
+			driver = new ChromeDriver(options);
+			
 		}
 		
 		
